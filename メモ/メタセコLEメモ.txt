@@ -1,0 +1,53 @@
+○.xファイル基本仕様
+・環境光(Ambient)は設定できません。
+・テンプレートは使わなくても生成されます。
+
+○メタセコLE基本仕様
+・頂点カラーは設定できません。
+
+○メタセコにおけるマテリアルと.xファイルのマテリアルの比較
+・メタセコのマテリアルに設定できる値
+基本設定
+　色(HSVもしくはRGBで設定)
+諸設定
+　不透明度
+　拡散光
+　自己照明
+　反射光
+　反射の強さ
+　周囲光
+
+・.xファイルのマテリアルテンプレート
+template Material {
+ <3D82AB4D-62DA-11cf-AB39-0020AF71E433>
+ ColorRGBA faceColor;
+ FLOAT power;
+ ColorRGB specularColor;
+ ColorRGB emissiveColor;
+ [...]
+}
+
+・比較
+不透明度	faceColor.a
+拡散光		faceColor.rgb
+自己照明	emissiveColor.rgb
+反射光		specularColor.rgb
+反射の強さ	power
+周囲光		なし(Ambient)
+
+各カラーの算出式は以下の通り
+ex)反射光の場合
+specularColor.r = 反射光 * R / 255		(Rは基本設定の色で0~255)
+
+他の色成分も同様にして求められる。
+faceColor.a だけは例外で faceColor.a = 不透明度
+
+○.xファイルで書き出し時のXオプションについて
+・可視オブジェクトのみ
+　そのままの意味です。
+・法線(スムージング)
+　MeshNormals {...}が追加されます。
+・UVマッピング
+　MeshTextureCoords{...} と MeshVertexColors{...}が追加されます。
+・頂点カラー
+　何も追加されません。

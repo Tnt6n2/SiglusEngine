@@ -1,0 +1,47 @@
+
+
+
+
+
+object.set_pos
+
+set_camera_pos_type_pos				// カメラとピントの位置を設定
+set_camera_pos_type_eye_angle		// カメラの位置と向きを設定
+set_camera_pos_type_pint_angle		// ピントの位置とカメラの向きを設定
+
+※角度について
+	h_rotate: 水平面での回転。0度=z軸正の向き、90度=x軸正の向き
+	v_rotate: 垂直面での回転。90度=真上、-90度=真下
+
+set_camera_eye(x, y, z)
+set_camera_eye(distance, h_rotate, v_rotate)
+set_camera_pint(x, y, z)
+set_camera_pint(distance, h_rotate, v_rotate)
+set_camera_rotate(angle)	// 時計回りにカメラを回す
+
+
+
+マウス：「今回押した」フラグ
+
+	・state == 2 になると自動クリア
+	・get_state は廃止
+	・clear は廃止
+
+	get_push_just	// 今回押した
+	get_off_just	// 今回放した
+	get_push_now	// 押している
+	get_off_now		// 放している
+
+	if (mouse.get_left.push_just == 1){
+		// 押したときの処理
+	}
+	if (mouse.get_left_off_just == 1){
+		// 放したときの処理
+	}
+	if (mouse.get_left_push_now == 1){
+		// 押しているときの処理
+	}
+	if (mouse.get_left_off_now == 1){
+		// 放しているときの処理
+	}
+

@@ -1,0 +1,17 @@
+
+tnm_kill_focus_for_all_radio	の実装をコメントアウトしてる
+▲tnm_game_message_box 以下３つにコメントアウトあり
+▲elm_editbox にコメントアウトあり	//					tnm_switch_screen_size_mode(false);		// Alt+Enter 時はスクリーンモード切替
+▲elm_frame_action.cpp にコメントアウトあり	do_action
+
+
+tnm_○○○.h	// クラス
+tnm_○○○.cpp	// クラス
+
+eng_○○○.h	// インターフェース
+eng_○○○.cpp	// インターフェース
+
+eng_○○○_ptr.h	// ポインタ
+
+
+

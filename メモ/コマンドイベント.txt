@@ -1,0 +1,49 @@
+
+
+★コマンドイベント
+
+■コマンドを予約する
+
+// 音を順番に鳴らす
+command_event.reserve_oneshot(
+	   0, ["$pcm_play", "sound00"],
+	1000, ["$pcm_play", "sound01"],
+	2000, ["$pcm_play", "sound02"]
+)
+
+	利点：単発予約が簡単！
+
+	// 例：１秒後に音を鳴らす
+	command_event.reserve_oneshot(
+		1000, ["$pcm_play", "sound00"],
+	)
+
+■コマンドイベント
+
+// 音を順番に鳴らす
+command_event.play_oneshot(
+	["$pcm_play", "sound00"], 1000, 
+	["$pcm_play", "sound01"], 1000, 
+	["$pcm_play", "sound02"], 1000
+)
+
+	利点：ループイベントやランダム待ち時間に応用が効く！
+
+	// 例：効果音をループさせる
+	command_event.play_loop(
+		["$pcm_play", "sound00"], 1000, 
+		["$pcm_play", "sound01"], 1000, 
+		["$pcm_play", "sound02"], 2000
+	)
+
+
+★早送りでスキップされた場合はどうする？
+
+	案１：特に何も処理しない（３２倍速なので普通に実行されることを期待する）
+
+
+command $pcm_play(property $name : str)
+{
+	pcm.play(str)
+}
+

@@ -1,0 +1,68 @@
+
+// ゲーム本編関連----------------------------------------------------------
+
+	// 割り込みコール開始
+	INTERRUPT_START
+
+	// ボタンコールからのリターン
+	WBCALL_FARRETURN
+
+	// ルビ
+	luby
+
+	// モノクロ・明暗
+	effect.mono → effect.object.monoとか（前、後対応）
+
+		↓ back.monoでモノクロ準備、ワイプで表示される他オブジェクトをモノクロ化出来たらサイコー
+		▲front.mono → 未実装
+		★front.object[0].mono → 実装済み
+
+	// ＳＥ無しでメニューに戻る
+	returnmenu_nofadeou
+
+	// マウスカーソルのＯＮ／ＯＦＦ
+	SET_MOUSECURSOR_OFF
+	SET_MOUSECURSOR_ON
+
+	// メッセージウィンドウボタンＥＸ全般
+	q-save, q-load, 中出し／ぶっかけ
+
+
+// 効果音関連----------------------------------------------------------
+
+	// ＰＣＭイベント
+	PCMEVENT_LOOP
+	PCMEVENT_RANDOM
+	PCMEVENT_STOP
+	PCMEVENT_WAIT
+	PCMEVENT_ONESHOT
+
+
+// 音声関連----------------------------------------------------------
+
+	// ＥＸ声関連
+	EXKOEPLAYWAITKEY
+
+
+// システム関連----------------------------------------------------------
+
+	// トーンカーブ補正
+	TONECURVE_OBJECT_ON
+	TONECURVE_OBJECT_OFF
+
+
+	// メニューシーンに戻る（※フェードアウトしない）
+	RETURNMENU_NOFADEOUT
+
+
+// ＣＧモード関連----------------------------------------------------------
+
+	// すべての登録されたＣＧのフラグ値を０／１にする
+	SET_CGTABLE_FLAGALL
+	CLR_CGTABLE_FLAGALL
+
+	// 登録されたＣＧのフラグ値を取得（Res 0=見てない 1=見た -1=見つからない）
+	GET_CGTABLE_FLAG
+
+
+

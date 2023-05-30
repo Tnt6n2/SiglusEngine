@@ -1,0 +1,21 @@
+
+LIBRARY		SiglusDebugger3
+
+EXPORTS
+	get_major_version
+	get_minor_version
+	
+	lb_add_item_001
+	lb_insert_item_001
+	
+	lv_add_item_001
+	lv_add_item_002
+	lv_add_item_visible_001
+	lv_insert_item_001
+	lv_insert_item_002
+	lv_insert_item_visible_001
+	lv_reduce_item_001
+	lv_set_item_cnt_001
+	lv_set_cell_text_001
+	lv_set_cell_text_visible_001
+	

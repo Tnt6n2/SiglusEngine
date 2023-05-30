@@ -1,0 +1,17 @@
+[display] (shake)
+  |
+  + [screen] (effect, quake)
+  |    |
+  |    + [back] (effect, quake)
+  |    + [front] (effect, quake)
+  |    + [next] (effect, quake)
+  |
+  + [excall.screen] (effect, quake)
+       |
+       + [back] (effect, quake)
+       + [front] (effect, quake)
+       + [next] (effect, quake)
+
+
+
+

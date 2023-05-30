@@ -1,0 +1,66 @@
+
+type_object::frameaction
+type_object::frameactionch
+type_object::frame
+type_object::cur_frameaction
+
+type_frameaction::start
+type_frameaction::add		// フレームアクションを追加する
+type_frameaction::stop		// 全ての汎用フレームアクションを止める
+
+type_frameactionch::start
+type_frameactionch::stop
+type_frameactionch::counter
+
+type_object_frameparam::pos
+type_object_frameparam::scale
+type_object_frameparam::rotate
+type_object_frameparam::tr
+type_object_frameparam::mono
+...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ■汎用フレームアクションの設定
+front.object[0].frameaction.start(-1, 1000, "$action00")
+
+	// 全ての汎用アクションを止め、アクションを１つ設定します。
+
+// ■汎用フレームアクションの追加
+front.object[0].frameaction.add(-1, 1000, "$action01")
+
+	// 現在のアクションを止めずに、アクションを追加します。
+
+// ■専用フレームアクションの設定
+front.object[0].frameaction_ch[0].start(-1, 1000, "$action00")
+
+	// １チャンネルにつきアクションは１つです。
+
+// ■フレームアクションのパラメータの取得
+command $action00($obj: type_object)
+{
+	// 現在のフレームアクションのカウンタを取得
+	l[0] = $obj.cur_frameaction.counter.get
+
+		// オブジェクトは複数のフレームアクションを持つことができるため、
+		// 「どのフレームアクションが呼ばれたか」を取得できる必要があります。
+		// 引数で取得でもいいのですが、書式が難しくなるため、
+		// 子エレメントで受け取ろうと思います。
+}
+
+// ■フレームパラメータ
+
+	// アクションでは補正座標のみを操作し、元のパラメータを設定したくない場合があります。
+	// 毎フレーム初期化される「フレームパラメータ」を使って解決します。
+
+// アクション０番
+command $action00($obj: type_object)
+{
+	$obj.frame.x += 10
+}
+
+// アクション１番
+command $action00($obj: type_object)
+{
+	$obj.frame.x += 30
+}
+

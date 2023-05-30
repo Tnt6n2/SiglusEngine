@@ -1,0 +1,15 @@
+
+となま（仮）
+RealLive2（仮）
+
+■800×600 の場合
+
+ＣＰＵ：PentiumⅢ 500MHz以上／Pentium4 2GHz以上
+メモリ：256MB 以上／512MB 以上
+ＨＤＤ：100MB 以上／4GB 以上
+画面解像度：800×600
+グラフィック：DirectX 9.0 対応のグラフィックカード
+サウンド：DirectSound
+DirectX：DirectX 9.0 以上
+ＤＶＤ：2倍速以上／4倍速以上
+ＶＲＡＭ：32MB／128MB

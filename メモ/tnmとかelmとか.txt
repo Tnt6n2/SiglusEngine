@@ -1,0 +1,49 @@
+
+tnm_array			配列
+tnm_string			文字列
+tnm_tree			ツリー
+tnm_tool			ツール
+tnm_sorter			ソーター
+tnm_element			エレメント
+
+tnm_ini				設定
+tnm_setup			セットアップ情報
+tnm_cmd_line		コマンドライン
+tnm_system_data		システムデータ
+tnm_global_data		グローバルデータ
+tnm_config_data		ユーザコンフィグ
+tnm_dir				ディレクトリ情報
+tnm_local_data		ローカルデータ
+tnm_syscom_data		システムコマンドデータ
+tnm_lexer			シーンレクサー
+tnm_proc			プロセス
+tnm_save			セーブストリーム
+tnm_error			エラー
+
+tnm_guid			ＧＵＩＤ
+tnm_namae			【名前】
+tnm_read_flag		既読フラグ
+tnm_color_table		カラーテーブル
+tnm_font			フォント
+tnm_gan				ＧＡＮ
+tnm_graphics		グラフィック
+tnm_tonecurve		トーンカーブ
+tnm_cg_table		ＣＧテーブル
+tnm_btn				ボタン・ボタンマネージャ
+tnm_btn_template	ボタン [アクション／効果音] テンプレート
+tnm_moji			文字
+tnm_moji_manager	文字マネージャ
+tnm_icon			アイコン
+
+tnm_wnd				ウィンドウ
+tnm_wnd_menu		ウィンドウメニュー
+tnm_rmenu			右クリックメニュー
+tnm_dlg				ダイアログ
+tnm_dlg_manager		ダイアログマネージャ
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+
+■フレームアクション（複数）
+
+object[0].frame_action.start("func", 1000)	// 1000ﾐﾘ秒後にエンドアクションが呼ばれて終了する
+object[0].frame_action.start("func", -1)	// ループアクション
+object[0].frame_action.clear_all
+
+object[0].frame_action_ch[0].start("func", 1000)
+object[0].frame_action_ch[1].start("func", -1)
+object[0].frame_action_ch[0].clear
+object[0].frame_action_ch[1].clear
+object[0].frame_action_ch.clear_all
+
+command func(property $obj : object, property $action : object_frame_action, property $time)
+{
+	$action.x = math.timetable(0, 0, 0, [0, 500, 100], [500, 1000, 0])
+}
+
+★改良点
+
+	・２つ目の frame_action を設定しても、前のフレームアクションは消えない
+		→ pcm.play みたいなもの
+
+	・全てのフレームアクションをクリアするには frame_action.clear_all を使う
+
+	・個別に扱いたい場合は frame_action_ch を使う
+		→ frame_action_ch[0].start みたいな感じ
+		→ pcmch みたいなもの
+		→ 16 個くらい準備しておく？
+
+	・フレームアクションを開始した時点で、専用のパラメータが作られる
+		→ frame_action_param
+		→ 開始していない場合、パラメータにはアクセス出来ない（エラー：不正なアクセス）
+		→ 理由：重い
+
+	・frame_action.start("func", 1000)
+		→ 1000 ﾐﾘ秒の時点でエンドアクションが呼ばれ、自動的に解放される
+
+	・frame_action.start("func", -1)
+		→ 明示的に解放されるまで呼ばれ続ける（フレームアクションの解放、またはオブジェクトの開放で解放される）
+
+★使い分け
+
+	・フレームアクションが終わっても残っていて欲しいパラメータは、$obj のパラメータを操作してください。
+	・フレームアクションが終わったら消えて欲しいパラメータは、$action のパラメータを操作してください。
+
+	★例
+
+		バストショットのスライドイン演出などは、frame_action_ch[0] + $obj を使うべきです。
+		（パラメータの変更を残して欲しい、次の演出が入ったら前の演出のエンドアクションを実行して終了して欲しい）
+
+		バストショットがジャンプする演出などは、frame_action + $action を使うべきです。
+		（パラメータの変更を残す必要がない、次の演出が入っても終わらせる必要がない）
+		（２つの演出を重ねたくない場合は frame_action_ch[1] などを使っても構いません。）
+
+■オブジェクトフレームアクションが持っているプロパティ
+
+	$action.disp
+	$action.pat_no
+
+	$action.x
+	$action.y
+	$action.z
+	$action.layer
+	$action.scale
+	$action.rotate
+
+	$action.tr
+	...
+
+■オブジェクトフレームアクションが持っていないプロパティ
+
+	$action.file
+	...

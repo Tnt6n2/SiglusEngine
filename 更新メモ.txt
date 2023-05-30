@@ -1,0 +1,20 @@
+
+■環境オブジェクトのタイプＡに以下を追加
+
+scale_x=int,13=scale_y=int
+
+■ocmch.play, ready に以下を追加
+
+10=bgm_name=str;
+
+■exkoe_play_wait, exkoe_play_wait_key が効いていなかったので修正
+
+■all_eve.wait が、dst_clip のイベントに対応していなかったのを修正
+
+■patno が範囲外だったときに、何も表示されないのが仕様
+　9月頃からいちばんうしろのパターンが表示されていたのを修正
+
+■dst_clip を当たり矩形にも入れよう
+
+■早送り時に gan が…
+

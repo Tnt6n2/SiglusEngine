@@ -1,0 +1,32 @@
+
+■代入文
+
+a[0] = 3
+
+left->node_form  : FM_INTREF
+right->node_form : FM_INT
+
+a[0] = a[1]
+
+left->node_form  : FM_INTREF
+right->node_form : FM_INTREF	// 参照はずしを行う
+
+a[0] = a[1] + a[2]
+
+left->node_form  : FM_INTREF
+right->node_form : FM_INT
+
+s[0] *= 3
+
+left->node_form   : FM_STRREF
+right->node_form  : FM_INT
+assign->node_form : FM_STR
+
+■式リスト
+
+[0, a[0]]
+
+exp_list[0]->node_form : FM_INT
+exp_list[1]->node_form : FM_INTREF	// 参照はずしを行う
+
+

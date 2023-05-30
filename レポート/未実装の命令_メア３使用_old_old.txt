@@ -1,0 +1,533 @@
+
+// ゲーム本編関連----------------------------------------------------------
+
+	// 割り込みコール開始
+	INTERRUPT_START
+
+	// ボタンコールからのリターン
+	WBCALL_FARRETURN
+
+	// ルビ
+	luby
+
+	// モノクロ・明暗
+	effect.mono → effect.object.monoとか（前、後対応）
+
+		↓ back.monoでモノクロ準備、ワイプで表示される他オブジェクトをモノクロ化出来たらサイコー
+		▲front.mono → 未実装
+		★front.object[0].mono → 実装済み
+
+	// ＳＥ無しでメニューに戻る
+	returnmenu_nofadeou
+
+	// GANアニメ
+
+	// 簡易アニメ
+
+
+	// システムメニューＯＮ／ＯＦＦ
+	SET_SYSTEMMENU_OFF
+	SET_SYSTEMMENU_ON
+
+		★syscom.set_disable
+		★syscom.set_enable
+
+	// マウスカーソルのＯＮ／ＯＦＦ
+	SET_MOUSECURSOR_OFF
+	SET_MOUSECURSOR_ON
+
+
+// 効果音関連----------------------------------------------------------
+
+	// ＰＣＭイベント
+	PCMEVENT_LOOP
+	PCMEVENT_RANDOM
+	PCMEVENT_STOP
+	PCMEVENT_WAIT
+	PCMEVENT_ONESHOT
+
+
+// 音声関連----------------------------------------------------------
+
+	// 声停止
+	KOESTOP
+
+		★koe_stop 実装
+
+	// ＥＸ声関連
+	EXKOEPLAYWAITKEY
+
+
+// メッセージウィンドウ関連----------------------------------------------------------
+
+	// ワイプ系グラフィック命令の処理時、ウィンドウを閉じる機能
+	SET_WAIP_WINDOWCLOSE_ON
+	SET_WAIP_WINDOWCLOSE_OFF
+	SET_GRPCOM_WINDOWCLOSE_ON
+	SET_GRPCOM_WINDOWCLOSE_OFF
+
+		★とりあえず、フラグたてて自力で close で…
+
+	// グラフィック命令の処理時、ウィンドウを閉じる機能
+	SET_WINDOW_ANIME_ON
+	SET_WINDOW_ANIME_OFF
+
+		★script.set_mwnd_anime_mode_on
+		★script.set_mwnd_anime_mode_off
+		★script.init_mwnd_anime_mode
+
+	// ウィンドウの「ＯＰＥＮ」のアニメのモード取得
+	GET_WINDOW_OPEN_ANIME_MOD
+
+		★使ってない
+
+	// すべてのウィンドウの「ＣＬＯＳＥ」のアニメのモードと時間を初期設定値に戻す
+	INIT_WINDOW_CLOSE_ANIME
+
+		★使ってない
+
+	≪モード≫
+		00 : アニメ無し
+		01 : フェードアニメ
+		02 : 上から
+		03 : 下から
+		04 : 左から
+		05 : 右から
+		06 : 上下近い方から
+		07 : 左右近い方から
+		08 : 上下左右近い方から
+		09 : 横拡大／縦拡大
+		10 : 横拡大／縦縮小
+		11 : 横拡大／縦なし
+		12 : 横縮小／縦拡大
+		13 : 横縮小／縦縮小
+		14 : 横縮小／縦なし
+		15 : 横なし／縦拡大
+		16 : 横なし／縦縮小
+
+	// 表示画面をバンク０にキャプチャーする（メッセージウィンドウも含む）（※キャプチャーじゃなくてウィンドウも同時にフェードできたら最高）
+	CAPTURE_WITH_MESSAGEWINDOW
+
+		★wipe_all で対応（マニュアル参照）
+
+		wipe(0, 1000)		← 普通のワイプ
+		wipe_all(0, 1000)	← メッセージウィンドウごとワイプ
+
+			→ 正確には「全てのオーダーをワイプする」コマンドです。
+			　 ※メッセージウィンドウのオーダーは「１」です。
+			　 ※ボタン選択肢もオーダーは「１」です。
+			　 ※Gameexe.ini で変更できます。
+
+
+// オブジェクト関連----------------------------------------------------------
+
+	// オブジェクトワイプコピーフラグＯＮ
+	OBJFRONTWAIPCOPY_ON
+	OBJBACKWAIPCOPY_ON
+
+		★完了
+
+	// オブジェクト消滅(開放)フラグＯＮ
+	OBJWAIPERASE
+
+		★完了
+
+// 画面効果--------------------------------------------------------
+
+	// 揺らし方タイプＥ（拡大揺らし）
+	FULLQUAKE_ZOOM
+
+		★完了
+
+	// １回フラッシュ待ち
+	BOXPIKACHU
+
+	// クエイク
+	QUAKE_D(20,200,5,0,1,1,0,0)
+	FULLQUAKE_D(40,100,2,1)
+	FULLQUAKE_UDLR(50,80,30,50,3,1)
+
+		★完了
+
+// 選択肢関連----------------------------------------------------------
+
+    ≪制御コード≫
+        ON:???   ： 　表示、選択可　（???=カラーテーブル番号）
+        READ:??? ： 　表示、選択不可（???=カラーテーブル番号）
+        OFF      ： 非表示、空きを詰める　
+        OFFSP    ： 非表示、空きを詰めない
+        CURSOR:??? ： カーソル番号を指定できます。（???=カーソル番号 -1=カーソル無し）
+                      選択肢ごとに表示したいカーソルを指定できます。
+                      「〇△×」や「キャラクターの顔」のカーソルを出して攻略案内とかに使うとか…
+    ≪使用例≫
+        F[000] = SEL{
+            選択肢Ａ
+                                ←※このリターンのあきは『有効』です。
+            選択肢Ｂ
+            ( (F[111]==0)=ON:000 (F[111]==1)=READ:001 (F[111]==2)=OFF (F[111]==3)=OFFSP )選択肢Ｃ
+            ( (F[111]>=0 && F[111]<=100)=READ:1 )選択肢Ｄ
+            ( (F[111]==1 || F[222]==1)=READ:1 )選択肢Ｅ
+            ( READ:1 )選択肢Ｆ
+            ( ON:2 )選択肢Ｇ
+        }
+
+    ≪カラーテーブル番号／カーソル番号にはフラグも使用できます≫
+        A[000]=0 A[000]=1 A[000]=2 A[000]=3
+        F[000] = SEL{
+            ( ON:A[000] )選択肢Ａ
+            ( ON:A[001] )選択肢Ｂ
+            ( ON:A[002] )選択肢Ｃ
+            ( ON:A[003] )選択肢Ｄ
+        }
+
+	★ボタン選択肢実装
+	★ON,READ,OFF,OFFSP 実装
+	▲CURSOR 未実装
+
+
+
+
+// システム関連----------------------------------------------------------
+
+	// 
+	OBJFRONTGET_SELSIZE
+
+
+	// システムコマンドメニューの状態を取得
+	GET_SYSTEMMENU_MOD
+
+	// 特殊コール前のシステムコマンドメニューの「一度読んだ文章の早送り」の状態を取得
+	CCOM_GET_READJUMP_USERFLAG
+
+		★syscom.get_read_skip_onoff
+		★syscom.get_read_skip_enable
+
+	// 自動早送り（一度読んだ文章の早送りを自動的に開始する）の「ON/OFF」を取得（Res : 0=OFF 1=ON）
+	GET_SYSTEM_FLAG_READJUMPCONTINUE
+
+		★syscom.get_auto_skip_onoff
+
+	// トーンカーブ補正
+	TONECURVE_OBJECT_ON
+	TONECURVE_OBJECT_OFF
+
+	// 環境設定 の「画面モード」
+	GET_SYSTEM_FLAG_DISPLAYMOD
+	SET_SYSTEM_FLAG_DISPLAYMOD
+
+	// ボタン選択肢の非表示
+	CCOM_BTNSEL_OFF
+
+	// メッセージウィンドウを消去
+	CCOM_MESSAGEWINDOW_OFF
+
+	// 自動早送り（一度読んだ文章の早送りを自動的に開始する）の「ON/OFF」
+	SET_SYSTEM_FLAG_READJUMPCONTINUE
+	GET_SYSTEM_FLAG_READJUMPCONTINUE
+
+		★syscom.set_auto_skip_onoff
+
+	// Ｃｔｒｌキーによる早送り機能
+	SET_CTRLKEYMOD_ON
+	SET_CTRLKEYMOD_OFF
+
+		★script.set_ctrl_skip_enable
+		★script.set_ctrl_skip_disable
+
+	// システムコマンドメニューの「メッセージを消す」の開始準備命令
+	CCOM_MESSAGE_ERASE_READY
+
+		★syscom.set_hide_mwnd_onoff
+
+	// 前の選択肢に戻る
+	RETURNSELPOINT
+
+		★syscom.return_to_sel
+
+	// メニューシーンに戻る（※フェードアウトしない）
+	RETURNMENU_NOFADEOUT
+
+	// キャンセルコールからのリターン
+	CANCELCALL_FARRETURN
+
+		★return
+
+	// ウィンドウの「汎用」ボタン
+	SET_WINDOW_EXBTN_ON
+	SET_WINDOW_EXBTN_OFF
+
+	// システムコマンドメニューの「一度読んだ文章の早送り」の開始準備命令
+	CCOM_READJUMP_START_READY
+
+		★syscom.set_read_skip_onoff
+
+	// エリア番号
+	CURSORAREA_GET
+	CURSORAREA_END
+	CURSORAREA_START
+
+		★front.object[0].get_color_a
+		★front.object[0].get_color_r
+		★front.object[0].get_color_g
+		★front.object[0].get_color_a
+
+	// マウスカーソル座標取得
+	GET_MOUSEPOS
+
+		★mouse.pos_x
+		★mouse.pos_y
+
+	// オブジェクト　前　文字パラメータ設定
+	OBJFRONTSET_MOJIPARAM
+
+	// 環境設定 の 音量設定 の 音声　の「音量」を設定（Vol : 0 ～ 255 : 小さいほど小音）
+	SET_SYSTEM_FLAG_KOEVOLUME
+	GET_SYSTEM_FLAG_KOEVOLUME
+
+		★syscom.set_koe_volume
+		★syscom.get_koe_volume
+
+	// 環境設定 の ＢＧＭフェード の「音量」を設定（Vol : 0 ～ 255 : 小さいほど小音）
+	SET_SYSTEM_FLAG_BGMFADEVOLUME
+	GET_SYSTEM_FLAG_BGMFADEVOLUME
+
+	// 環境設定 の 文字速度 の「速度」を設定（Speed : 10 ～ 100 : 小さいほど速い）
+	SET_SYSTEM_FLAG_MESSAGESPEED
+	GET_SYSTEM_FLAG_MESSAGESPEED
+
+		★syscom.set_message_speed
+		★syscom.get_message_speed
+
+	// 環境設定 の 文字速度 の「モード」を設定（Mod : 0=ﾒｯｾｰｼﾞ速度  1=ﾉｰｳｪｲﾄ  2=ﾉｰｳｪｲﾄﾍﾟｰｼﾞ単位）
+	SET_SYSTEM_FLAG_MESSAGEMOD
+	GET_SYSTEM_FLAG_MESSAGEMOD
+
+	// 環境設定 の ウィンドウ背景 の「Ｒ(赤)」　を設定（R   : 0 - 255）
+	SET_SYSTEM_FLAG_WINDOWBACKR
+	SET_SYSTEM_FLAG_WINDOWBACKR
+
+	// 環境設定 の ウィンドウ背景 の「Ｇ(緑)」　を設定（G   : 0 - 255）
+	SET_SYSTEM_FLAG_WINDOWBACKG
+	SET_SYSTEM_FLAG_WINDOWBACKG
+
+	// 環境設定 の ウィンドウ背景 の「Ｂ(青)」　を設定（B   : 0 - 255）
+	SET_SYSTEM_FLAG_WINDOWBACKB
+	SET_SYSTEM_FLAG_WINDOWBACKB
+
+	// 環境設定 の ウィンドウ背景 の「透明度」　を設定（Tr  : 0 - 255）
+	SET_SYSTEM_FLAG_WINDOWBACKTR
+	SET_SYSTEM_FLAG_WINDOWBACKTR
+
+	// システムコマンドメニューの項目を実行
+	CALL_SYSTEMMENU全般
+
+	// 環境設定 の「画面モード」を設定
+	SET_SYSTEM_FLAG_DISPLAYMOD
+
+	// 環境設定 の 音量設定 の ＢＧＭの「ON/OFF」を設定（Use : 0=OFF 1=ON
+	SET_SYSTEM_FLAG_BGMUSE
+	GET_SYSTEM_FLAG_BGMUSE
+
+		★syscom.set_bgm_onoff
+		★syscom.get_bgm_onoff
+
+	// 環境設定 の 音量設定 の 音声　の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOEUSE
+	GET_SYSTEM_FLAG_KOEUSE
+
+		★syscom.set_koe_onoff
+		★syscom.get_koe_onoff
+
+	// 環境設定 の「音声設定」を設定（Mod : 0=音声有り  1=音声無し  2=音声のみ）
+	SET_SYSTEM_FLAG_KOEMOD
+	GET_SYSTEM_FLAG_KOEMOD
+
+	// 環境設定 の ＢＧＭフェード の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_BGMFADEUSE
+	GET_SYSTEM_FLAG_BGMFADEUSE
+
+	// 環境設定 の 音量設定 の 効果音の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_PCMUSE
+	GET_SYSTEM_FLAG_PCMUSE
+
+		★syscom.set_pcm_onoff
+		★syscom.get_pcm_onoff
+
+	// 環境設定 の 音量設定 の ｼｽﾃﾑ音の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_SEUSE
+	GET_SYSTEM_FLAG_SEUSE
+
+		★syscom.set_se_onoff
+		★syscom.get_se_onoff
+
+	// 環境設定 の その他の設定 の「速度重視の為、マウスカーソルをモノクロにする。」を設定（Mod : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_MOUSE
+	GET_SYSTEM_FLAG_MOUSE
+
+	// 環境設定 の その他の設定 の「本プログラムの動作を遅くして…。」を設定（Mod : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_WAIT
+	GET_SYSTEM_FLAG_WAIT
+
+	// 環境設定 の その他の設定 の「音声の再生時に頻繁に雑音が入る場合に…。」を設定（Mod : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_SOUND
+	GET_SYSTEM_FLAG_SOUND
+
+	// 環境設定 の その他の設定 の「マウスのホイールボタンの下回しで…。」を設定（Mod : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_MOUSEWHEEL
+	GET_SYSTEM_FLAG_MOUSEWHEEL
+
+	// 環境設定 の その他の設定 の「声の再生中に次の文章に進んでも再生を続ける。」を設定（Mod : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOEDONTSTOP
+	GET_SYSTEM_FLAG_KOEDONTSTOP
+
+	// 環境設定 の その他の設定 の「≪サウンド周波数の設定≫」を設定
+	SET_SYSTEM_FLAG_SOUNDRATE
+	GET_SYSTEM_FLAG_SOUNDRATE
+
+	// 環境設定 の オートモード の「文字時間」を設定（Time : 0～500ﾐﾘ秒 ※設定値は10ﾐﾘ秒単位なので端数切捨てます）
+	SET_SYSTEM_FLAG_AUTOMODEMOJIWAIT
+
+	// オートモード の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_AUTOMODEUSE
+
+	// 環境設定 の オートモード の「最小時間」を設定（Time : 0～10000ﾐﾘ秒 ※設定値は100ﾐﾘ秒単位なので端数切捨てます）
+	SET_SYSTEM_FLAG_AUTOMODEMINWAIT
+
+	// メッセージバックバッファのクリア
+	CLEAR_MSGBK
+
+	// すでに記憶されている「前の選択肢に戻る」のポイントをクリアする
+	SELPOINT_CLEAR
+
+	// システムコマンドメニューの「一度読んだ文章の早送り」を停止する命令
+	READJUMP_STOP
+
+		★syscom.set_read_skip_onoff
+
+	// オートモード の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_AUTOMODEUSE
+
+		★syscom.set_auto_mode_onoff
+
+	// 環境設定 の 音量設定 の ＢＧＭの「音量」を取得（Res : 0 ～ 255 : 小さいほど小音）
+	GET_SYSTEM_FLAG_BGMVOLUME
+
+		★syscom.get_bgm_volume
+
+	// 環境設定 の 音量設定 の 効果音の「音量」を取得（Res : 0 ～ 255 : 小さいほど小音）
+	GET_SYSTEM_FLAG_PCMVOLUME
+
+		★syscom.get_pcm_volume
+
+	// 環境設定 の 音量設定 の ｼｽﾃﾑ音の「音量」を取得（Res : 0 ～ 255 : 小さいほど小音）
+	GET_SYSTEM_FLAG_SEVOLUME
+
+		★syscom.get_se_volume
+
+	// 環境設定 の「キャラクタ音声」を取得（No : 登録番号  Res : 0=OFF 1=ON）
+	GET_SYSTEM_FLAG_CHRKOEUSE
+
+	// 環境設定 の 文字速度 の「モード」の初期値を取得（Res : 0=ﾒｯｾｰｼﾞ速度  1=ﾉｰｳｪｲﾄ  2=ﾉｰｳｪｲﾄﾍﾟｰｼﾞ単位）
+	GET_SYSTEM_FLAG_DEFAULT_MESSAGEMOD
+
+	// 環境設定 の 文字速度 の「速度」の初期値を取得（Res   : 10 ～ 100 : 小さいほど速い）
+	GET_SYSTEM_FLAG_DEFAULT_MESSAGESPEED
+
+	// ＲＧＢ 透明度 ﾌｨﾙﾀﾓｰﾄﾞ 取得
+	GET_SYSTEM_FLAG_WINDOWBACKRGBTRMOD
+
+	// ＲＧＢ 透明度 ﾌｨﾙﾀﾓｰﾄﾞ の初期値を取得
+	GET_SYSTEM_FLAG_DEFAULT_WINDOWBACKRGBTRMOD
+
+	// 環境設定 の ウィンドウ背景 の「ﾌｨﾙﾀﾓｰﾄﾞ」を設定（Mod : 0=減算合成(通常)  1=フィルタ合成）
+	SET_SYSTEM_FLAG_WINDOWBACKMOD
+
+	// 環境設定 の 時短再生 の「普通に読み進めている時の声再生」の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOESPEED
+
+	// 環境設定 の 時短再生 の「普通に読み進めている時の声再生」の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOESPEEDUSE_NORMAL
+
+	// 環境設定 の 時短再生 の「オートモード中の声再生」の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOESPEEDUSE_AUTOMODE
+
+	// 環境設定 の 時短再生 の「文章の巻き戻し中の声再生」の「ON/OFF」を設定（Use : 0=OFF 1=ON）
+	SET_SYSTEM_FLAG_KOESPEEDUSE_MSGBK
+
+
+// 文字関連----------------------------------------------------------
+
+	// 数値を文字列に変換する（123 → "  123"）（Length=文字列のケタ）
+	NUMSTRHAN
+
+	// 文字列変数に文字列を追加
+	STRCAT
+
+		★ s[0] += "abc"
+
+	// 数値を文字列に変換する（123 → "00123"）（Length=文字列のケタ）
+	NUMSTRHANZERO
+
+
+// セーブ／ロード関連----------------------------------------------------------
+
+	// 最新のセーブデータ番号取得
+	GET_SAVE_NEW
+
+	// セーブデータの存在確認
+	GET_SAVE_CHECK
+
+	// 環境設定 の その他の設定 の「セーブ／ロードの際、確認メッセージを表示する。」を取得（Res : 0=OFF 1=ON）
+	GET_SYSTEM_FLAG_SAVELOAD
+
+	// セーブ（警告なし）
+	DATASAVE_NOWARNING
+
+	// ロード（警告なし）（ＳＥを再生。 Gameexe.iniで設定）
+	DATALOAD_SEPLAY_NOWARNING
+
+	// セーブ（警告なし）（ＳＥを再生。 Gameexe.iniで設定）
+	DATASAVE_SEPLAY_NOWARNING
+
+	// セーブデータの「年」取得
+	GET_SAVE_YEAR
+
+	// セーブデータの「月」取得
+	GET_SAVE_MONTH
+
+	// セーブデータの「日」取得
+	GET_SAVE_DAY
+
+	// セーブデータの「曜日」取得（Res　0=日　1=月　2=火　3=水　4=木　5=金　6=土）
+	GET_SAVE_WEEK
+
+	// セーブデータの「時」取得
+	GET_SAVE_HOUR
+
+	// セーブデータの「分」取得
+	GET_SAVE_MINUTE
+
+	// セーブデータの「秒」取得
+	GET_SAVE_SECOND
+
+	// セーブデータの「ﾐﾘ秒」取得
+	GET_SAVE_MILLISECOND
+
+	// セーブデータの「タイトル」取得
+	GET_SAVE_TITLE
+
+
+// ＣＧモード関連----------------------------------------------------------
+
+	// すべての登録されたＣＧのフラグ値を０／１にする
+	SET_CGTABLE_FLAGALL
+	CLR_CGTABLE_FLAGALL
+
+	// 登録されたＣＧのフラグ値を取得（Res 0=見てない 1=見た -1=見つからない）
+	GET_CGTABLE_FLAG
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+
+■解説
+
+	end：終了処理。end_action、既読フラグなど
+
+■init（起動時、もしくは resize による作成時）
+
+A.init
+	A.my_init_param
+	A.my_restruct
+	B0.reinit
+		B0.my_init_param
+		B0.my_restruct
+	B1.reinit
+		B1.my_init_param
+		B1.my_restruct
+
+■安全な reinit（object[0].init など）
+
+A.reinit
+	A.finish
+		B0.finish
+		B1.finish
+		A.my_finish
+	A.my_reinit
+	A.my_restruct
+	B0.reinit
+		B0.my_reinit
+		B0.my_restruct
+	B1.reinit
+		B1.my_reinit
+		B1.my_restruct
+
+■安全なロード（syscom.load など）
+
+A.reinit
+	A.finish
+		B0.finish
+			B0.my_finish
+		B1.end
+			B1.my_finish
+		A.my_finish
+	A.my_reinit
+	B0.reinit
+		B0.my_reinit
+	B1.reinit
+		B1.my_reinit
+
+A.load
+	A.my_load
+	A.my_restruct
+	B0.load
+		B0.my_load
+		B0.my_restruct
+	B1.load
+		B1.my_load
+		B1.my_restruct
+
+
+
+■mwnd
+
+	reinit(end = true, restruct = true);
+
+	end()
+	reinit(end = false, restruct = false);
+	load(restruct = true);
+
+■mwnd_list
+	reinit(end = true, restruct = true);
+
+	end()
+	reinit(end = false, restruct = false);
+	load(restruct = true);
+
+■stage_list
+
+
+
+mwnd.reinit
+	restruct_template
+	name.init
+--	name.set_template
+	waku.reinit
+--	set_waku
+--		waku.set_template
+--			reinit
+--			restruct_template
+--		waku.restruct_waku
+
+
+mwnd.set_waku
+	waku.set_template
+		reinit
+		restruct_template
+	waku.restruct_waku
+
+
+
+
+
+
+
+
+
+
+
+
+

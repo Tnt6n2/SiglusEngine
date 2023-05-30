@@ -1,0 +1,252 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TNM_COMPILER DIALOGEX 0, 0, 385, 266
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Siglus スクリプトコンパイラ"
+MENU IDR_MENU
+CLASS "visualarts_siglus_compiler_main_dialog_class"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "再検索\n自動選択\nコンパイル\n実行",IDC_BTN_ALL_SEL_AUTO,6,147,42,59,BS_MULTILINE | WS_GROUP
+    LTEXT           "(c)VisualArt's",IDC_STC_VERSION,6,251,96,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_LV_INI,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_GROUP | WS_TABSTOP,52,42,81,32
+    CONTROL         "",IDC_LV_INC,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_GROUP | WS_TABSTOP,52,78,81,60
+    CONTROL         "",IDC_LV_SCN,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_GROUP | WS_TABSTOP,52,142,81,64
+    CONTROL         "",IDC_LV_LOG,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_GROUP | WS_TABSTOP,138,42,239,165
+    EDITTEXT        IDC_EDT_STATUS,6,209,371,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
+    COMBOBOX        IDC_CMB_PROJECT,6,6,252,102,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    PUSHBUTTON      "設定",IDC_BTN_PROJECT_CONFIG,262,6,36,12,WS_GROUP
+    PUSHBUTTON      "新規",IDC_BTN_NEW_PROJECT,302,6,36,12,WS_GROUP
+    PUSHBUTTON      "削除",IDC_BTN_DEL_PROJECT,341,6,36,12,WS_GROUP
+    CONTROL         "デバッグ ON",IDC_CHK_DEBUG_ON,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,7,24,49,12
+    CONTROL         "デバッグ OFF",IDC_CHK_DEBUG_OFF,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,60,24,49,12
+    CONTROL         "実行する",IDC_CHK_EXECUTE,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,113,24,49,12
+    CONTROL         "ｽﾀｰﾄｼｰﾝ",IDC_CHK_START_SCENE,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,167,24,49,12
+    EDITTEXT        IDC_EDT_START_SCENE,221,24,76,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_EDT_START_Z_NO,302,24,35,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "",IDC_SPN_START_Z_NO,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS | WS_GROUP,329,22,11,14
+    PUSHBUTTON      "ﾏﾆｭｱﾙ",IDC_BTN_MANUAL,341,24,36,12,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "再検索\n全選択\nコンパイル\n実行",IDC_BTN_ALL_SEL_ALL,6,106,42,39,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "ﾘｽﾄ更新",IDC_BTN_FIND,6,42,42,12,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "自動選択",IDC_BTN_SEL_AUTO,6,58,42,12,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "コンパイル",IDC_BTN_COMPILE,6,74,42,12,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "実行",IDC_BTN_RUN,6,90,42,12,BS_MULTILINE | WS_GROUP
+    CONTROL         "垂直同期を待たない",IDC_CHK_NO_INTERVAL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,162,240,82,12
+    CONTROL         "圧縮しない",IDC_CHK_EASY_LINK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,246,240,90,12
+    PUSHBUTTON      "←説明",IDC_BTN_EXPLAIN_UNDER,336,239,41,24
+    EDITTEXT        IDC_EDT_DETAIL,6,224,371,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
+END
+
+IDD_PROJECT_SETTING DIALOGEX 0, 0, 389, 278
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "プロジェクト設定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "ＯＫ",IDC_BTN_OK,71,248,314,26,WS_GROUP
+    PUSHBUTTON      "キャンセル",IDC_BTN_CANCEL,15,248,52,26
+    EDITTEXT        IDC_EDT_PROJECT_NAME,70,4,314,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_EDT_SCN_PATH,70,22,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_TMP_PATH,70,40,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_OUT_PATH,70,58,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_EXE_PATH,71,93,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_WORK_PATH,71,111,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_EDITOR_PATH,71,129,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    EDITTEXT        IDC_EDT_MANUAL_PATH,71,147,314,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    CTEXT           "★ここに [ ss ] [ tmp ] [ exe ] [ work ] の４つのフォルダを含むフォルダをドラッグ＆ドロップして下さい。",IDC_STC_DRAGDROP,71,218,314,26,SS_CENTERIMAGE | SS_SUNKEN,WS_EX_ACCEPTFILES
+    RTEXT           "プロジェクト名 ： ",IDC_STC_PROJECT_NAME,14,4,56,12,SS_CENTERIMAGE
+    RTEXT           "SS フォルダ ： ",IDC_STC_SCN_PATH,14,22,56,12,SS_CENTERIMAGE
+    RTEXT           "TMP フォルダ ： ",IDC_STC_TMP_PATH,14,40,56,12,SS_CENTERIMAGE
+    RTEXT           "出力 フォルダ ： ",IDC_STC_OUT_PATH,14,58,56,12,SS_CENTERIMAGE
+    RTEXT           "実行 ファイル ： ",IDC_STC_EXE_PATH,12,93,58,12,SS_CENTERIMAGE
+    RTEXT           "作業 フォルダ ： ",IDC_STC_WORK_PATH,12,111,58,12,SS_CENTERIMAGE
+    RTEXT           "ﾃｷｽﾄｴﾃﾞｨﾀ ： ",IDC_STC_EDITOR_PATH,12,130,58,12,SS_CENTERIMAGE
+    RTEXT           "マニュアル ： ",IDC_STC_MANUAL_PATH,12,146,58,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDT_OUT_PATH_NOANGOU,116,75,268,12,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    RTEXT           "出力 フォルダ（暗号なし） ： ",IDC_STC_OUT_PATH_NOANGOU,14,75,99,12,SS_CENTERIMAGE
+    CONTROL         "UTF-8",IDC_CHK_UTF8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,225,35,10
+    GROUPBOX        "拡張",IDC_GRP_EXTEND,12,164,220,46
+    LTEXT           "Gameexe.ini の名前",IDC_STC_GAMEEXE_INI,24,175,65,8
+    EDITTEXT        IDC_EDT_GAMEEXE_INI,96,172,129,14,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    LTEXT           "拡張 inc("";""で区切)",IDC_STC_EXTEND_INC,24,193,64,8
+    EDITTEXT        IDC_EDT_EXTEND_INC,96,190,129,14,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    GROUPBOX        "出力",IDC_GRP_OUTPUT,238,164,147,46
+    LTEXT           "Gameexe.dat",IDC_STC_GAMEEXE_DAT,244,175,44,8
+    EDITTEXT        IDC_EDT_GAMEEXE_DAT,290,172,88,14,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+    LTEXT           "Scene.pck",IDC_STC_SCENE_PCK,254,194,34,8
+    EDITTEXT        IDC_EDT_SCENE_PCK,290,190,88,14,ES_AUTOHSCROLL | WS_GROUP,WS_EX_ACCEPTFILES
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_TNM_COMPILER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 384
+        VERTGUIDE, 6
+        VERTGUIDE, 52
+        VERTGUIDE, 133
+        VERTGUIDE, 138
+        VERTGUIDE, 377
+        BOTTOMMARGIN, 263
+        HORZGUIDE, 6
+        HORZGUIDE, 18
+        HORZGUIDE, 36
+        HORZGUIDE, 42
+        HORZGUIDE, 206
+        HORZGUIDE, 221
+    END
+
+    IDD_PROJECT_SETTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 385
+        VERTGUIDE, 12
+        VERTGUIDE, 70
+        VERTGUIDE, 96
+        VERTGUIDE, 225
+        VERTGUIDE, 288
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 274
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU
+BEGIN
+    POPUP "設定(&C)"
+    BEGIN
+        MENUITEM "全体設定(&A)",                    ID_40001
+    END
+    POPUP "暗号化"
+    BEGIN
+        MENUITEM "暗号化についての説明",                  40002
+        MENUITEM "ＥＸＥを暗号化する",                   40003
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,137,0
+ PRODUCTVERSION 1,1,137,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "CompanyName", "VisualArt's"
+            VALUE "FileDescription", "VisualArt's Siglus スクリプトコンパイラ"
+            VALUE "FileVersion", "1.1.137.0"
+            VALUE "InternalName", "SiglusCompiler"
+            VALUE "LegalCopyright", "Copyright (C) VisualArt's 2020"
+            VALUE "OriginalFilename", "SiglusCompiler.exe"
+            VALUE "ProductName", "Siglus"
+            VALUE "ProductVersion", "1.1.137.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "icon1.ico"
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
